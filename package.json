@@ -1,0 +1,22 @@
+{
+  "name": "cp-netsmysql",
+  "version": "1.0.0",
+  "description": "node express typescript mysql",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Csprier/cp-netsmysql.git"
+  },
+  "author": "cpdev",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Csprier/cp-netsmysql/issues"
+  },
+  "homepage": "https://github.com/Csprier/cp-netsmysql#readme",
+  "dependencies": {
+    "typescript": "^4.2.4"
+  }
+}
