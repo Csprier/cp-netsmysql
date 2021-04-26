@@ -16,4 +16,4 @@ app.get('/', (req: Request, res: Response) => {
   res.send('<h1>Hello from server.ts!</h1>');
 });
 
-app.listen(PORT, () => console.log(`Running on ${PORT}!`));
+app.listen(PORT, () => console.log(`Running on http://localhost:${PORT}!`));

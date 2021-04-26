@@ -16,4 +16,4 @@ app.use(body_parser_1.default.urlencoded({ extended: true }));
 app.get('/', function (req, res) {
     res.send('<h1>Hello from server.ts!</h1>');
 });
-app.listen(PORT, function () { return console.log("Running on " + PORT + "!"); });
+app.listen(PORT, function () { return console.log("Running on http://localhost:" + PORT + "!"); });
