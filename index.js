@@ -1,2 +1,2 @@
-'use strict';
-console.log('Jeezis fkn cripes!');
+"use strict";
+console.log('Operational!');
