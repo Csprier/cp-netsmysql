@@ -1,5 +1,8 @@
--- @BLOCK
+--@BLOCK
 CREATE TABLE Greeting(id INT PRIMARY KEY, message VARCHAR(24));
--- @BLOCK
+--@BLOCK
 INSERT INTO Greeting (id, message)
 VALUES (1, 'Welcome to the database.');
+--@BLOCK
+SELECT *
+FROM Greeting;

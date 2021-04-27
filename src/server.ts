@@ -29,21 +29,20 @@ app.use(bodyParser.json());
 /** CONNECTION */
 // const connection = mysql.createConnection(`mysql://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.HOST}:${process.env.DB_PORT}/${process.env.database}`);
 const connection = mysql.createConnection({
-  host: 'localhost:3306',
+  host: '127.0.0.1',
   user: 'root',
-  password: 'dev1337',
-  database: 'netsm'
+  password: 'dev1337'
 });
 
-connection.query('SELECT * FROM Greeting', (data: any, error: Error) => {
+connection.query('SELECT * FROM Greeting', (row: any, error: Error) => {
   if (error) console.error(error);
-  console.log(data);
+  console.log(row);
 });
 
 /** SERVE HTML */
-app.get('/', (req: Request, res: Response) => {
-  res.send('<h1>Hello from server.ts!</h1>');
-});
+// app.get('/', (req: Request, res: Response) => {
+//   res.send('<h1>Hello from server.ts!</h1>');
+// });
 
 /** LISTEN */
 app.listen(PORT, () => console.log(`Running on http://localhost:${PORT}!`));
