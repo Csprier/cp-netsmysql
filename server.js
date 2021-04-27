@@ -16,38 +16,37 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 /** POOL */
 var pool = mysql.createPool({
-    host: process.env.HOST,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    database: process.env.database
+    host: 'localhost:3306',
+    user: 'root',
+    password: 'dev1337',
+    database: 'netsm'
 });
-pool.getConnection(function (error, connection) {
-    connection.query('SELECT 1 + 1 AS solution', function (error, rows, fields) {
-        if (error)
-            console.error(error);
-        console.log('The solution is: ', rows[0].solution);
-        connection.release();
-    });
+pool.query('SELECT * FROM Greeting', function (data, error) {
+    if (error)
+        console.error(error);
+    console.log(data);
 });
-pool.on('connection', function (connection) {
-    console.log('Connected!');
-});
-pool.end(function (error) { return console.error(error); });
 app.get('/', function (req, res) {
     res.send('<h1>Hello from server.ts!</h1>');
 });
 app.listen(PORT, function () { return console.log("Running on http://localhost:" + PORT + "!"); });
 /** CONNECTION */
 // const connection = mysql.createConnection(`mysql://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.HOST}:${process.env.DB_PORT}/${process.env.database}`);
-// connection.connect((error: Error) => {
-//   if (error) {
-//     console.error('error connecting: ' + error.stack);
-//     return;
-//   }
-//   console.log('connected as id ' + connection.threadId);
+// const connection = mysql.createConnection({
+//   host: 'localhost:3306',
+//   user: 'root',
+//   password: 'dev1337',
+//   database: 'netsm'
 // });
-// connection.query('SELECT 1 + 1 AS solution', (error: Error, rows: any, fields: any) => {
-//   if (error) console.error(error);
-//   console.log('The solution is: ', rows[0].solution);
-//   connection.release();
+// connection.connect((error: Error) => {
+//   if (error) console.log(error);
+//   console.log('connected as id: ' + connection.threadId);
+//   connection.query('SELECT * FROM Greeting', (error: Error, rows: any, fields: any) => {
+//     if (error) console.error(error);
+//     console.log(rows);
+//   });
+// });
+// connection.end((error: Error) => {
+//   if (error) console.log('error:' + error.message);
+//   console.log('-- Closing connection to the database. See you next time. --');
 // });
