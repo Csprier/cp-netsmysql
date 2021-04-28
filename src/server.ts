@@ -28,16 +28,31 @@ app.use(bodyParser.json());
 
 /** CONNECTION */
 // const connection = mysql.createConnection(`mysql://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.HOST}:${process.env.DB_PORT}/${process.env.database}`);
-const connection = mysql.createConnection({
-  host: '127.0.0.1',
+const db = mysql.createConnection({
+  host: 'localhost',
+  port: 3306,
   user: 'root',
   password: 'dev1337'
 });
 
-connection.query('SELECT * FROM Greeting', (row: any, error: Error) => {
-  if (error) console.error(error);
-  console.log(row);
+db.connect((error: Error) => {
+  if (error) console.log('An error has occurred when trying to connect to the database.');
+  console.log('Connection established.');
 });
+
+db.end((error: Error) => {
+  // The connection is terminated gracefully
+  // Ensures all previously enqueued queries are still
+  // before sending a COM_QUIT packet to the MySQL server.
+  if (error) console.log('error: ', error);
+  else console.log('done: ');
+});
+
+
+// connection.query('SELECT * FROM Greeting', (row: any, error: Error) => {
+//   if (error) console.error(error);
+//   console.log(row);
+// });
 
 /** SERVE HTML */
 // app.get('/', (req: Request, res: Response) => {
