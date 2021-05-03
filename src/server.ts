@@ -48,16 +48,5 @@ db.end((error: Error) => {
   else console.log('done: ');
 });
 
-
-// connection.query('SELECT * FROM Greeting', (row: any, error: Error) => {
-//   if (error) console.error(error);
-//   console.log(row);
-// });
-
-/** SERVE HTML */
-// app.get('/', (req: Request, res: Response) => {
-//   res.send('<h1>Hello from server.ts!</h1>');
-// });
-
 /** LISTEN */
 app.listen(PORT, () => console.log(`Running on http://localhost:${PORT}!`));
