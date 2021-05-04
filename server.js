@@ -10,14 +10,25 @@ dotenv_1.default.config();
 var PORT = process.env.PORT;
 var app = express_1.default(); // Use Express Type declaration
 var bodyParser = require('body-parser');
-var db = require('./database.js');
+// const db = require('./database.js');
 app.use(helmet_1.default());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-db.query('SELECT * FROM Greeting', function (req, res, error) {
-    if (error)
-        console.log('Error in query:', error);
-    console.log('Response:', res);
+var mysql = require('mysql');
+var connection = mysql.createConnection({
+    connectionLimit: 10,
+    host: 'localhost',
+    user: 'root',
+    password: 'dev1337',
+    database: 'netsm',
+    acquireTimeout: 6000000,
 });
+connection.connect();
+connection.query('SELECT * FROM Greeting', function (error, rows) {
+    if (error)
+        console.log('Error:', error);
+    console.log('rows: ', rows);
+});
+connection.end();
 /** LISTEN */
 app.listen(PORT, function () { return console.log("Running on http://localhost:" + PORT + "!"); });

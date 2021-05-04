@@ -1,28 +1,34 @@
 const mysql = require('mysql');
 
-/** CONNECTION */
-const db = mysql.createConnection({
+const db = mysql.createPool({
+	connectionLimit: 10, // default = 10
 	host: 'localhost',
 	user: 'root',
 	password: 'dev1337',
 	database: 'netsm',
+	acquireTimeout: 6000000,
 });
 
-db.connect((error) => {
-	if (error)
-		console.log(
-			'An error has occurred when trying to connect to the database:',
-			error
-		);
-	console.log('Connection established.');
+db.query('SELECT * FROM Greeting', (error, results) => {
+	if (error) console.log('Error:', error);
+	console.log('Results: ', results);
 });
 
-db.end((error) => {
-	// The connection is terminated gracefully
-	// Ensures all previously enqueued queries are still
-	// before sending a COM_QUIT packet to the MySQL server.
-	if (error) console.log('error: ', error);
-	console.log('Database connection terminated.');
-});
+// db.getConnection((error, connection) => {
+// 	if (error) console.log('Error:', error);
+// 	connection.release();
+// });
+
+// db.on('connection', function (connection) {
+// 	connection.query('SELECT * FROM Greeting', (error, results) => {
+// 		if (error) console.log('Error:', error);
+// 		console.log('Results: ', results);
+// 		connection.release();
+// 	});
+// });
+
+// db.end((err) => {
+// 	// all connections in the pool have ended
+// });
 
 module.exports = db;
